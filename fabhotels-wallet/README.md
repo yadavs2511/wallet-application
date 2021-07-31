@@ -1,6 +1,6 @@
 ## About
 
-This project is about  *Building a Java library for online banking platform to build the virtual wallet to track users transaction account.*
+This project is about  *Building a Java library to build the wallet application to track users transaction account.*
 
 This is a spring boot application with in memory database *H2*. I am using JPA(Java Persistance API) to interact with the in memory database.
 
@@ -9,10 +9,11 @@ This is a spring boot application with in memory database *H2*. I am using JPA(J
 Following steps illustrate procedures you need to follow to run the code :
 
 `Step 1` : Clone the project in STS from below path
+   Path : `https://github.com/yadavs2511/wallet-application`
 
-`Step 2` : import maven project
+`Step 2` : Import maven project
 
-`Step 3` : run as spring boot project
+`Step 3` : Run as spring boot project
 
 ## Functionality
 
@@ -31,13 +32,13 @@ select * from bank_transaction;
 ```
 
 
-Now, I think you are all set up. Lets see what this library can do :
+Now, I think you are all set up. Lets see what this application can do :
 
 * ### 1) Create an new user :
 
 Provided endpoint : `http://localhost:8086/api/createUser`
-
-use post request as :
+Method: POST
+use request as :
 ```{JSON}
 {
     "userId": 5,
@@ -48,7 +49,7 @@ use post request as :
 }
 ```
 * ### 2) Login for existing user :
-
+Method: GET
 Provided endpoint : `http://localhost:8086/api/userLogin?userId=3&password=abcd`
 
 ```
@@ -59,8 +60,8 @@ This will return user details if userid and password are correct else it will th
 * ### 3) Add an account to user 4 (Dan in this case) :
 
 Provided endpoint : `http://localhost:8086/api/createAccount`
-
-use post request as :
+Method: POST
+use request as :
 ```{JSON}
 {
 	"balance":4000,
@@ -78,13 +79,13 @@ use post request as :
 I am assuming a user can have multiple accounts.
 
 Provided endpoint for creating new wallet :
-use Post method.
+Method: POST
 ```
 http://localhost:8086/api/createWallet/{userId}
 ```
 
 * ### 5) Return current account balance :
-
+Method: GET
 Provided endpoint : `http://localhost:8086/api/wallet/{walletId}/account/{accountId}/getAccountBalance`.
 
  * pass account number as account id and wallet holder id as wallet id.
@@ -92,14 +93,14 @@ Provided endpoint : `http://localhost:8086/api/wallet/{walletId}/account/{accoun
 The backend JAVA code checks for all validation. If the accountId is not associated with provided walledId, an exception is thrown.
 
 * ### 6) Perform a addAmount transaction on an account :
-
+Method: POST
 Provided endpoint : `http://localhost:8086/api/wallet/{walletId}/account/{accountId}/addAmount/{amount}`
 
 Allows one to deposit amount into an account associated with a wallet.
 
 
 * ### 7) Perform a transfer from one account to another account :
-
+Method: POST
 Provided endpoint :
 `http://localhost:8086/api/wallet/{walletId}/account/{trasferFromAccountId}/transfer/wallet/{toWalletId}/account/{transferToAccountId}/amount/{amount}`.
 
@@ -107,7 +108,7 @@ Provided endpoint :
 Allows one to transfer money from one account in one wallet to another account in another wallet.
 
 * ### 8) Return last N transactions for an account :
-
+Method: GET
 Provided endpoint :  `http://localhost:8086/api/wallet/{walletId}/account/{accountId}/getLastNTransactions/{n}`.
 
 Allows one to check their respect transaction statement.
